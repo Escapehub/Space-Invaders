@@ -10,7 +10,7 @@ sudo g++ main.cpp source/* -lsfml-graphics -lsfml-window -lsfml-system
 ## To do list
 
 - [x] Player movement
-- [x] Player shoot (kinda)
+- [x] Player shoot
 - [ ] Enemies
 - [ ] Bonus
-- [ ] Barriers 
+- [ ] Barriers

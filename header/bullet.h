@@ -6,10 +6,9 @@ class Bullet : public Entity
 {
 public:
   Bullet();
-  void Shoot(sf::RenderWindow&);
+  bool Shoot(sf::RenderWindow&, sf::Texture& bulletTexture);
   void createBullet(sf::Vector2f);
 private:
-  sf::Texture bulletTexture;
   sf::Vector2f playerpos;
   sf::Clock clock;
 };
