@@ -1,5 +1,6 @@
 #include "header/entity.h"
 #include "header/bullet.h"
+#include "header/enemy.h"
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(1920, 1080), "Space Invaders");
@@ -15,6 +16,13 @@ int main() {
   std::vector<Bullet> bullets;
   sf::Texture bulletTexture;
   bulletTexture.loadFromFile("sprites/bullet.png");
+
+  // Enemies
+  Enemy enemies;
+  sf::Texture enemyTexture;
+  enemyTexture.loadFromFile("sprites/enemies.png");
+  enemies.createEnemies(enemyTexture, window);
+  enemies.drawEnemies(window);
 
   while(window.isOpen()) {
     window.clear();
@@ -34,10 +42,16 @@ int main() {
     }
 
     // Player movement
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)|| sf::Keyboard::isKeyPressed(sf::Keyboard::D))
       player.Move(Entity::Direction::Right);
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
       player.Move(Entity::Direction::Left);
+
+    // Loop player around the screen
+    if (player.getPosition().x > window.getSize().x)
+      player.setPosition(0, player.getPosition().y);
+    else if (player.getPosition().x < 0)
+      player.setPosition(window.getSize().x, player.getPosition().y);
 
     // Making bullet fly up the screen
     for (int i = 0; i < bullets.size(); i++) {
@@ -45,6 +59,7 @@ int main() {
         bullets.erase(bullets.begin() + i);
     }
     window.draw(player);
+
     window.display();
   }
 
