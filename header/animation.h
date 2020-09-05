@@ -6,6 +6,7 @@ class Animation: public sf::Sprite
 {
 public:
 	Animation();
+	virtual ~Animation();
 	void setStartRect(sf::IntRect);
 	void setAnimationSpeed(float);
 	void setFrameSize(int);

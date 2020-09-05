@@ -4,6 +4,10 @@ Bullet::Bullet() {
 
 }
 
+Bullet::~Bullet() {
+  
+}
+
 void Bullet::createBullet(sf::Vector2f spawnPos) {
   playerpos = spawnPos;
 

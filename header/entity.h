@@ -8,6 +8,7 @@ class Entity : public Animation
 public:
   Entity();
   Entity(sf::Texture&, sf::IntRect);
+  virtual ~Entity();
   void setSpeed(float);
   enum Direction { Up, Down, Left, Right };
   void Move(Direction);

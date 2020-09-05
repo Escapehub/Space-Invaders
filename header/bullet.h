@@ -6,6 +6,7 @@ class Bullet : public Entity
 {
 public:
   Bullet();
+  virtual ~Bullet();
   bool Shoot(sf::RenderWindow&, sf::Texture& bulletTexture);
   void createBullet(sf::Vector2f);
 private:

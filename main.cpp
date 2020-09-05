@@ -1,6 +1,7 @@
 #include "header/entity.h"
 #include "header/bullet.h"
 #include "header/enemy.h"
+#include "header/barrier.h"
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(1920, 1080), "Space Invaders");
@@ -21,8 +22,12 @@ int main() {
   Enemy enemies;
   sf::Texture enemyTexture;
   enemyTexture.loadFromFile("sprites/enemies.png");
-  enemies.createEnemies(enemyTexture, window);
-  enemies.drawEnemies(window);
+
+  // Barriers
+  sf::Texture barrierTexture;
+  barrierTexture.loadFromFile("sprites/shields.png");
+  Barrier barrier1;
+  barrier1.setStatus(4);
 
   while(window.isOpen()) {
     window.clear();
@@ -59,7 +64,8 @@ int main() {
         bullets.erase(bullets.begin() + i);
     }
     window.draw(player);
-
+    barrier1.draw(window, barrierTexture, sf::Vector2f(window.getSize().x / 5, window.getSize().y - window.getSize().y / 4));
+    enemies.drawEnemies(window, enemyTexture);
     window.display();
   }
 

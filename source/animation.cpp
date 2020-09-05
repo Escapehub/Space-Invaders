@@ -4,6 +4,10 @@ Animation::Animation() {
 
 }
 
+Animation::~Animation() {
+
+}
+
 void Animation::setStartRect(sf::IntRect ani) {
   startRect = ani;
 }
