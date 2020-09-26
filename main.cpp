@@ -22,12 +22,21 @@ int main() {
   Enemy enemies;
   sf::Texture enemyTexture;
   enemyTexture.loadFromFile("sprites/enemies.png");
+  sf::Clock enemyClock;
 
   // Barriers
   sf::Texture barrierTexture;
   barrierTexture.loadFromFile("sprites/shields.png");
-  Barrier barrier1;
-  barrier1.setStatus(4);
+  int windowQuater = window.getSize().x / 5;
+  Barrier barrier1(barrierTexture, 0);
+  barrier1.setPosition(sf::Vector2f(windowQuater, (window.getSize().y / 5) * 4));
+  Barrier barrier2(barrierTexture, 0);
+  barrier2.setPosition(sf::Vector2f(windowQuater * 2, (window.getSize().y / 5) * 4));
+  Barrier barrier3(barrierTexture, 0);
+  barrier3.setPosition(sf::Vector2f(windowQuater * 3, (window.getSize().y / 5) * 4));
+  Barrier barrier4(barrierTexture, 0);
+  barrier4.setPosition(sf::Vector2f(windowQuater * 4, (window.getSize().y / 5) * 4));
+  std::vector<Barrier> barriers = { barrier1, barrier2, barrier3, barrier4 };
 
   while(window.isOpen()) {
     window.clear();
@@ -58,13 +67,37 @@ int main() {
     else if (player.getPosition().x < 0)
       player.setPosition(window.getSize().x, player.getPosition().y);
 
+    // Hit reg for bullet to barrier
+    if(!bullets.empty()) {
+      for (int i = 0; i < bullets.size(); i++) {
+        if (bullets[i].getGlobalBounds().intersects(barriers[0].getGlobalBounds())) {
+          barriers[0].Hit();
+          bullets.erase(bullets.begin()+i);
+        }
+        if (bullets[i].getGlobalBounds().intersects(barriers[1].getGlobalBounds())) {
+          barriers[1].Hit();
+          bullets.erase(bullets.begin()+i);
+        }
+        if (bullets[i].getGlobalBounds().intersects(barriers[2].getGlobalBounds())) {
+          barriers[2].Hit();
+          bullets.erase(bullets.begin()+i);
+        }
+        if (bullets[i].getGlobalBounds().intersects(barriers[3].getGlobalBounds())) {
+          barriers[3].Hit();
+          bullets.erase(bullets.begin()+i);
+        }
+      }
+    }
+
     // Making bullet fly up the screen
     for (int i = 0; i < bullets.size(); i++) {
       if(bullets[i].Shoot(window, bulletTexture))
         bullets.erase(bullets.begin() + i);
     }
     window.draw(player);
-    barrier1.draw(window, barrierTexture, sf::Vector2f(window.getSize().x / 5, window.getSize().y - window.getSize().y / 4));
+    for (Barrier bazza : barriers) {
+      window.draw(bazza);
+    }
     enemies.drawEnemies(window, enemyTexture);
     window.display();
   }
