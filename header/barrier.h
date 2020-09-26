@@ -5,13 +5,14 @@
 class Barrier : public Entity
 {
 public:
-  Barrier();
+  Barrier(sf::Texture&, int);
   virtual ~Barrier();
-  void draw(sf::RenderWindow&, sf::Texture, sf::Vector2f);
-  void setStatus(int);
-  int getStatus();
+  void Restore();
+  void Hit();
 private:
+  std::vector<sf::IntRect> textureRects = {sf::IntRect(0,0, 100, 75), sf::IntRect(100, 0, 100, 75), sf::IntRect(200,0, 100, 75), sf::IntRect(300,0, 100, 75), sf::IntRect(400,0, 100, 75)};
   int status;
+  void Update();
 };
 
 #endif // !BARRIER_H

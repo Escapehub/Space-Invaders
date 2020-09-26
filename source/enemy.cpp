@@ -5,10 +5,33 @@ Enemy::Enemy() {
 }
 
 Enemy::~Enemy() {
-  
+
 }
 
 void Enemy::drawEnemies(sf::RenderWindow& window, sf::Texture texture) {
+  createEnemies(texture);
+  for (sf::Sprite sprite : row1) {
+    window.draw(sprite);
+  }
+  for (sf::Sprite sprite : row2) {
+    window.draw(sprite);
+  }
+  for (sf::Sprite sprite : row3) {
+    window.draw(sprite);
+  }
+  for (sf::Sprite sprite : row4) {
+    window.draw(sprite);
+  }
+  for (sf::Sprite sprite : row5) {
+    window.draw(sprite);
+  }
+}
+
+void Enemy::moveEnemies(sf::RenderWindow& window) {
+  
+}
+
+void Enemy::createEnemies(sf::Texture& texture) {
   // Enemy Texture Rects
   sf::IntRect enemy1Rect(0, 0, 60, 60);
   sf::IntRect enemy2Rect(0, 60, 60, 60);
@@ -36,21 +59,4 @@ void Enemy::drawEnemies(sf::RenderWindow& window, sf::Texture texture) {
     row5[i].setTextureRect(enemy3Rect);
     row5[i].setPosition(i * 60, 240);
   }
-// Drawing enemies
- for (sf::Sprite sprite : row1) {
-   window.draw(sprite);
- }
- for (sf::Sprite sprite : row2) {
-   window.draw(sprite);
- }
- for (sf::Sprite sprite : row3) {
-   window.draw(sprite);
- }
- for (sf::Sprite sprite : row4) {
-   window.draw(sprite);
- }
- for (sf::Sprite sprite : row5) {
-   window.draw(sprite);
- }
-
 }
