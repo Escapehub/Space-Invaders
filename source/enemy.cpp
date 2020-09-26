@@ -1,24 +1,22 @@
 #include "../header/enemy.h"
 
-Enemy::Enemy() {
-
+Enemy::Enemy(sf::Texture& texture) {
+  createEnemies(texture);
+  this->speed = 0.1f;
 }
 
 Enemy::~Enemy() {
 
 }
 
-void Enemy::drawEnemies(sf::RenderWindow& window, sf::Texture texture) {
-  createEnemies(texture);
+void Enemy::drawEnemies(sf::RenderWindow& window) {
   for (int i = 0; i < 12; i++) {
     for (int j = 0; j < 5; j++) {
-        window.draw(enemies[i][j]);
+      enemies[i][j].Move(Entity::Direction::Right);
+      //if (enemies[i][j].getPosition().x > (window.getSize().x - 30))
+      window.draw(enemies[i][j]);
     }
   }
-}
-
-void Enemy::moveEnemies(sf::RenderWindow& window) {
-
 }
 
 void Enemy::createEnemies(sf::Texture& texture) {
