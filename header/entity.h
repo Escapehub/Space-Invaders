@@ -14,6 +14,7 @@ public:
   void Move(Direction);
 private:
   Direction currentDirection;
+protected:
   float speed;
 };
 
