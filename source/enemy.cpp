@@ -39,3 +39,13 @@ void Enemy::createEnemies(sf::Texture& texture) {
     }
   }
 }
+
+sf::FloatRect Enemy::getBounds() {
+  sf::FloatRect bounds[12][5];
+  for (int i = 0; i < 12; i++) {
+    for (int j = 0; j < 5; j++) {
+      bounds[i][j] = enemies[i][j].getGlobalBounds();
+    }
+  }
+  return bounds;
+}
