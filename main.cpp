@@ -19,9 +19,9 @@ int main() {
   bulletTexture.loadFromFile("sprites/bullet.png");
 
   // Enemies
-  Enemy enemies;
   sf::Texture enemyTexture;
   enemyTexture.loadFromFile("sprites/enemies.png");
+  Enemy enemies(enemyTexture);
   sf::Clock enemyClock;
 
   // Barriers
@@ -38,6 +38,7 @@ int main() {
   barrier4.setPosition(sf::Vector2f(windowQuater * 4, (window.getSize().y / 5) * 4));
   std::vector<Barrier> barriers = { barrier1, barrier2, barrier3, barrier4 };
 
+  //auto enemyBounds = enemies.getBounds();
   while(window.isOpen()) {
     window.clear();
     sf::Event event;
@@ -86,6 +87,7 @@ int main() {
           barriers[3].Hit();
           bullets.erase(bullets.begin()+i);
         }
+        //auto enemyBounds = enemies.getBounds();
       }
     }
 
@@ -98,7 +100,8 @@ int main() {
     for (Barrier bazza : barriers) {
       window.draw(bazza);
     }
-    enemies.drawEnemies(window, enemyTexture);
+    enemies.moveEnemiesRight(window);
+    enemies.drawEnemies(window);
     window.display();
   }
 

@@ -8,7 +8,7 @@ public:
   Enemy(sf::Texture&);
   virtual ~Enemy();
   void drawEnemies(sf::RenderWindow&);
-  sf::FloatRect getBounds();
+  void moveEnemies(sf::RenderWindow&);
 private:
   void createEnemies(sf::Texture&);
   Entity enemies[12][5];

@@ -12,8 +12,6 @@ Enemy::~Enemy() {
 void Enemy::drawEnemies(sf::RenderWindow& window) {
   for (int i = 0; i < 12; i++) {
     for (int j = 0; j < 5; j++) {
-      enemies[i][j].Move(Entity::Direction::Right);
-      //if (enemies[i][j].getPosition().x > (window.getSize().x - 30))
       window.draw(enemies[i][j]);
     }
   }
@@ -40,12 +38,12 @@ void Enemy::createEnemies(sf::Texture& texture) {
   }
 }
 
-sf::FloatRect Enemy::getBounds() {
-  sf::FloatRect bounds[12][5];
+void Enemy::moveEnemies(sf::RenderWindow& window) {
   for (int i = 0; i < 12; i++) {
     for (int j = 0; j < 5; j++) {
-      bounds[i][j] = enemies[i][j].getGlobalBounds();
+      if (enemies[i][j].getPosition().x > window.getSize().x)
+      enemies[i][j].move(0.1f, 0);
+      window.draw(enemies[i][j]);
     }
   }
-  return bounds;
 }
